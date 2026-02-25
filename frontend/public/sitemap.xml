@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- 英文版本 -->
+  <url>
+    <loc>https://wysikhealth.com/en</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wysikhealth.com/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://wysikhealth.com/en" />
+  </url>
+
+  <!-- 繁体中文版本 -->
+  <url>
+    <loc>https://wysikhealth.com/zh-TW</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wysikhealth.com/en" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wysikhealth.com/zh-TW" />
+  </url>
+
+  <!-- 英文问卷页面 -->
+  <url>
+    <loc>https://wysikhealth.com/en/quiz</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wysikhealth.com/zh-TW/quiz" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://wysikhealth.com/en/quiz" />
+  </url>
+
+  <!-- 繁体中文问卷页面 -->
+  <url>
+    <loc>https://wysikhealth.com/zh-TW/quiz</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wysikhealth.com/en/quiz" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wysikhealth.com/zh-TW/quiz" />
+  </url>
+
+  <!-- 英文结果页面 -->
+  <url>
+    <loc>https://wysikhealth.com/en/results</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wysikhealth.com/zh-TW/results" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://wysikhealth.com/en/results" />
+  </url>
+
+  <!-- 繁体中文结果页面 -->
+  <url>
+    <loc>https://wysikhealth.com/zh-TW/results</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wysikhealth.com/en/results" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wysikhealth.com/zh-TW/results" />
+  </url>
+</urlset>

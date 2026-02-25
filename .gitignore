@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Environment variables (IMPORTANT: never commit secrets!)
+.env
+.env.local
+.env.production
+
+# Node.js
+node_modules/
+.next/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing
+.hypothesis/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Logs
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# Kiro
+.kiro/
+
+# Misc
+*.bak
+*.tmp

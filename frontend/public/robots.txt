@@ -1,0 +1,28 @@
+# WysikHealth robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /private/
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://wysikhealth.com/sitemap.xml
+
+# Crawl delay for other bots
+User-agent: *
+Crawl-delay: 1
+Request-rate: 1/10

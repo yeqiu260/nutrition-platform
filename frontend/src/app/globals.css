@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-gray-900 antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Heiti TC", system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 text-white px-4 py-2 rounded-lg font-medium
+           hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-medium
+           hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg
+           focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
+  }
+}
+
+/* ========================================
+   问卷样式：灰白底、黑白银＋黄色点缀
+   ======================================== */
+
+/* 问卷容器 */
+.sq-container {
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 30px 24px 36px;
+  background: #f5f5f7;
+  border-radius: 22px;
+  border: 1px solid #d7dae2;
+  box-shadow: 0 12px 35px rgba(15,23,42,0.08);
+  color: #111827;
+}
+
+/* 进度条 */
+.sq-progress {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.sq-bar {
+  height: 100%;
+  width: 0%;
+  background: #F7B027;
+  transition: width 0.4s ease;
+}
+
+/* 状态列 */
+.sq-status {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 18px;
+}
+
+.sq-current-supp {
+  font-weight: 600;
+  color: #F7B027;
+}
+
+/* 问题区域 */
+.sq-question-title {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.sq-question-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* 选项按钮 */
+.sq-options {
+  display: grid;
+  gap: 10px;
+}
+
+.sq-option-btn {
+  padding: 14px 16px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #111827;
+  transition: all 0.18s ease;
+}
+
+.sq-option-btn:hover {
+  border-color: #F7B027;
+  color: #000000;
+  background: #FFF9E6;
+  transform: translateY(-1px);
+}
+
+/* 结果卡片 */
+.sq-result-card {
+  margin-bottom: 28px;
+}
+
+.sq-report-badge {
+  display: inline-block;
+  background: #FFF7E0;
+  color: #92400E;
+  padding: 5px 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.sq-result-title {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.sq-medical-note {
+  background: #f7f7fb;
+  padding: 15px;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 4px solid #b0b0b0;
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+.sq-result-tag {
+  font-size: 0.85rem;
+  color: #4b5563;
+  margin-bottom: 18px;
+}
+
+.sq-disclaimer {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* 重新测评按钮 */
+.sq-restart-btn {
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid #111827;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sq-restart-btn:hover {
+  background: #F7B027;
+  border-color: #F7B027;
+  color: #111827;
+}
+
+/* 产品卡片 */
+.sq-product-list {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.sq-product-card {
+  position: relative; /* 为 Sponsored 标签提供定位基准 */
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(15,23,42,0.04);
+}
+
+.sq-product-img {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  object-fit: cover;
+}
+
+.sq-product-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sq-product-price {
+  font-size: 0.85rem;
+  color: #F7B027;
+  font-weight: 600;
+}
+
+.sq-buy-btn {
+  margin-top: auto;
+  align-self: stretch;
+  border-radius: 999px;
+  border: 1px solid #111827;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.sq-buy-btn:hover {
+  background: #F7B027;
+  border-color: #F7B027;
+  color: #111827;
+}
+
+.sq-product-empty {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* AI 推荐理由 - 黄色高亮 */
+.sq-ai-reasons {
+  background: #fef3c7;
+  border-left: 3px solid #fbbf24;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.sq-ai-reasons-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #92400e;
+  margin-bottom: 6px;
+}
+
+.sq-ai-reasons-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sq-ai-reasons-list li {
+  font-size: 0.7rem;
+  color: #92400e;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.sq-ai-reasons-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* 合作商名称 */
+.sq-product-partner {
+  font-size: 0.7rem;
+  color: #6b7280;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+/* 商品区域标题 */
+.sq-product-section-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  padding-left: 4px;
+  border-left: 3px solid #F7B027;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}

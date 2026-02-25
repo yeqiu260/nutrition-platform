@@ -1,0 +1,333 @@
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading",
+    "error": "Error",
+    "success": "Success",
+    "backToHome": "Back to Home",
+    "register": "Free Sign Up"
+  },
+  "landing": {
+    "nav": {
+      "features": "Features",
+      "startQuiz": "Start Assessment"
+    },
+    "hero": {
+      "title": "Stop guessing. Find the supplements your body truly needs.",
+      "subtitle": "Through a 5-minute lifestyle questionnaire, we analyze your sleep, stress, and dietary habits. We create science-based nutrition recommendations tailored for you, not just selling the most expensive products.",
+      "cta": "Start Free Assessment",
+      "learnMembership": "Learn About Membership"
+    },
+    "badges": {
+      "newSystem": "New AI Nutrition Analysis System Launched",
+      "scientificFormula": "Evidence-Based Formulas",
+      "privacySecure": "Privacy & Security Encrypted"
+    },
+    "features": {
+      "sectionTitle": "Why Choose WysikHealth?",
+      "sectionSubtitle": "This is not a typical quiz, but a screening system designed based on functional medicine logic.",
+      "smartAnalysis": {
+        "title": "Smart Logic Analysis",
+        "description": "The system dynamically adjusts follow-up questions based on your initial answers. If you sleep well, we won't waste time asking about insomnia details."
+      },
+      "priorityRanking": {
+        "title": "Precise Priority Ranking",
+        "description": "Not all deficiencies need supplementation. We categorize results into 'High Priority' and 'Moderate Recommendation' to help you spend wisely."
+      },
+      "transparency": {
+        "title": "Transparent Ingredient History",
+        "description": "Every recommended product clearly indicates its source, dosage, and related research, so you know exactly what you're putting into your body."
+      }
+    },
+    "cta": {
+      "sectionTitle": "Ready? Let's Start the Analysis",
+      "sectionSubtitle": "The entire process takes about 2-3 minutes. All data is used only for analysis and will not be shared.",
+      "startButton": "Start Free Assessment Now"
+    },
+    "footer": {
+      "about": "About Us",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact Us"
+    }
+  },
+  "auth": {
+    "welcome": "Welcome",
+    "contactMethod": "Contact Method",
+    "email": "Email",
+    "phone": "Phone",
+    "emailPlaceholder": "your@email.com",
+    "phonePlaceholder": "0912345678",
+    "sendCode": "Send Verification Code",
+    "sending": "Sending...",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "loginTitle": "Login",
+    "registerTitle": "Create Account",
+    "adminLoginTitle": "Admin Login",
+    "welcomeBack": "Welcome back, please enter your credentials",
+    "createAccount": "Create your WysikHealth account",
+    "loggingIn": "Logging in...",
+    "registering": "Registering...",
+    "forgotPassword": "Forgot password?",
+    "setPassword": "Set Password",
+    "passwordHint": "At least 6 characters",
+    "completeRegister": "Complete Registration",
+    "backToModifyEmail": "Change email",
+    "username": "Username",
+    "isAdminPartner": "I'm an admin/partner",
+    "backToUserLogin": "Back to user login",
+    "otp": {
+      "title": "Enter Verification Code",
+      "subtitle": "Verification code sent to {contact}",
+      "placeholder": "000000",
+      "label": "Verification Code",
+      "hint": "Please enter the 6-digit code sent to {contact}",
+      "submit": "Verify and Login",
+      "verifying": "Verifying...",
+      "resend": "Resend Code",
+      "resendCountdown": "Resend in {seconds}s",
+      "changeContact": "Change Contact"
+    },
+    "consent": {
+      "title": "Terms of Use",
+      "subtitle": "Please read and agree to the following terms",
+      "healthDataTitle": "Health Data Usage Terms",
+      "healthDataText": "We will collect your questionnaire responses and health-related information to generate personalized nutrition recommendations. Your data will be encrypted and stored securely, used only for service provision, and will not be shared with third parties.",
+      "disclaimerTitle": "Disclaimer",
+      "disclaimerText": "The recommendations provided by this platform are for reference only and do not constitute medical advice. Please consult a healthcare professional before starting any supplement regimen.",
+      "healthConsentLabel": "I have read and agree to the Health Data Usage Terms (Required)",
+      "marketingConsentLabel": "I agree to receive nutrition and health-related information and offers (Optional)",
+      "agreeAndContinue": "Agree and Continue",
+      "processing": "Processing...",
+      "mustAgree": "You must agree to the Health Data Usage Terms to continue"
+    },
+    "footer": {
+      "loginAgree": "By logging in, you agree to our",
+      "terms": "Terms of Service",
+      "needHelp": "Need help?",
+      "contactSupport": "Contact Support",
+      "termsAndPrivacy": "I have read and agree to the",
+      "termsLink": "Terms of Service",
+      "and": "and",
+      "privacyLink": "Privacy Policy",
+      "required": "(Required)"
+    },
+    "errors": {
+      "invalid_otp": "Invalid verification code, please try again",
+      "otp_expired": "Verification code has expired, please request a new one",
+      "rate_limit": "Too many requests, please try again later",
+      "invalid_email": "Invalid email format",
+      "user_not_found": "User not found",
+      "unauthorized": "Unauthorized access",
+      "internal_error": "System error, please try again later",
+      "send_failed": "Failed to send verification code, please try again later",
+      "verify_failed": "Verification failed, please check the code"
+    }
+  },
+  "quiz": {
+    "progress": "Progress: {current}/{total}",
+    "submit": "Submit Questionnaire",
+    "title": "Health Questionnaire",
+    "loading": "Loading...",
+    "next": "Next",
+    "previous": "Previous",
+    "skip": "Skip this step",
+    "analyzing": "AI is analyzing your health data...",
+    "pleaseWait": "AI is integrating your lifestyle questionnaire and report data to find the most important nutritional priorities for you.",
+    "uploadComplete": "Upload Complete",
+    "startAnalysis": "Start Analysis",
+    "currentSupplement": "Current Supplement: {name}",
+    "phase": {
+      "screening": "Initial Screening",
+      "detail": "Detailed Assessment"
+    },
+    "upload": {
+      "title": "Final Step",
+      "subtitle": "Upload your report for more accurate analysis, or start calculation directly.",
+      "uploadTitle": "Upload Health Report (Optional)",
+      "uploadSubtitle": "We will use AI to identify your values and provide more accurate recommendations. Supports PDF, JPG, PNG (Max 50MB).",
+      "dragDrop": "Drag and drop files here, or",
+      "clickUpload": "click to upload",
+      "mobilePhoto": "You can also use your phone to take photos and upload",
+      "cameraUpload": "Take Photo",
+      "cameraDesc": "Capture report photo",
+      "orDivider": "or",
+      "fileSize": "{size} MB",
+      "description": "We will use AI to identify your values and provide more accurate recommendations. Supports PDF, JPG, PNG (Max 50MB)."
+    },
+    "usage": {
+      "remaining": "AI analyses remaining today:",
+      "dailyLimit": "Daily AI analysis limit reached ({limit} times/day)",
+      "resetDate": "{date}",
+      "todayAnalysis": "Today's AI Analysis Count",
+      "todayRemaining": "Today's AI Analysis Remaining"
+    }
+  },
+  "results": {
+    "title": "Your Personalized Recommendations",
+    "disclaimer": "[Health Disclaimer] This assessment is based on your self-reported lifestyle and symptom information and is for reference only. Any health advice cannot replace professional medical advice. If you have any health concerns, please consult a healthcare professional.",
+    "confidence": "Confidence Score",
+    "reasoning": "Recommendation Reason",
+    "basedOnLabReport": "Based on Lab Report",
+    "product": {
+      "buy": "Buy Now",
+      "learnMore": "Learn More"
+    },
+    "noRecommendations": "Assessment Result: No obvious priority supplements needed at this time",
+    "aiGenerated": "AI has analyzed and recommended the most suitable nutrition supplement plan for you",
+    "localCalculated": "Below are the priority supplement items based on your answers (up to 3 items)",
+    "aiRecommended": "AI Recommended",
+    "aiRecommendedProducts": "AI Recommended Products",
+    "aiReasons": "AI Analysis - Why this supplement is recommended:",
+    "noProducts": "No products available in this category yet, stay tuned.",
+    "confidenceScore": "Confidence: {score}%",
+    "usageLimit": "You have reached your daily AI analysis limit ({limit} times/day)",
+    "usageRemaining": "/ {remaining} analyses remaining",
+    "errorFetchingRecommendations": "Failed to fetch AI recommendations",
+    "analysisComplete": "Analysis Complete",
+    "assessmentResult": "Assessment Result",
+    "recommendedDirection": "Recommended Supplement",
+    "explanation": "Explanation:",
+    "description": "Explanation:",
+    "safetyWarning": "⚠️ Safety Warning:",
+    "classification": "Classification: {level} (Internal Score: {score})",
+    "priorityLabel": "Classification",
+    "highPriority": "High Priority",
+    "mediumPriority": "Moderate Recommendation",
+    "internalScore": "Internal Score",
+    "priorityLevels": {
+      "high": "High Priority",
+      "medium": "Moderate Recommendation"
+    },
+    "noRecommendationsTitle": "Focus on Diet and Lifestyle for Now",
+    "noRecommendationsText": "Based on your questionnaire responses, no supplement line stands out as requiring 'priority supplementation' at this time. This usually means you can focus on balanced diet, regular routine, and exercise first, then adjust as needed.",
+    "focusOnLifestyle": "Focus on Diet and Lifestyle for Now",
+    "noRecommendationsDetail": "Based on your questionnaire responses, no supplement line stands out as requiring 'priority supplementation' at this time. This usually means you can focus on balanced diet, regular routine, and exercise first, then adjust as needed.",
+    "retakeQuiz": "Retake Assessment",
+    "productSection": "🛒 {title}",
+    "by": "by {partner}",
+    "priceInquiry": "Price Upon Request",
+    "sponsored": "⭐ Sponsored",
+    "aiAnalysisError": "(Using local analysis results)",
+    "usingLocalResults": "Using local analysis results"
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "products": "Product Management",
+      "pending": "Pending Products",
+      "review": "Review Queue",
+      "logout": "Logout"
+    },
+    "products": {
+      "title": "Product Management",
+      "add": "Add Product",
+      "edit": "Edit",
+      "delete": "Delete",
+      "name": "Product Name",
+      "price": "Price",
+      "status": "Status"
+    },
+    "forms": {
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save",
+      "delete": "Delete"
+    },
+    "quickLinks": {
+      "products": "Product Management",
+      "productsDesc": "Manage all products",
+      "pending": "Pending Products",
+      "pendingDesc": "Review new products",
+      "analytics": "User Behavior Analytics",
+      "analyticsDesc": "View event tracking",
+      "review": "Review Queue",
+      "reviewDesc": "Review recommendation results"
+    },
+    "roles": {
+      "superAdmin": "Super Admin",
+      "admin": "Admin",
+      "partner": "Partner",
+      "user": "User"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "header": {
+    "user": {
+      "generalMember": "General Member",
+      "defaultName": "User",
+      "history": "📋 Assessment History",
+      "favorites": "❤️ My Favorites",
+      "profile": "⚙️ Profile Settings"
+    }
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "itemCount": "{count} products",
+    "count": "{count} products",
+    "empty": {
+      "title": "No favorite products yet",
+      "description": "Click the heart button in recommendation results to save products",
+      "subtitle": "Click the heart button in recommendation results to save products",
+      "startQuiz": "Start Questionnaire",
+      "action": "Start Questionnaire"
+    },
+    "remove": "Remove Favorite",
+    "viewProduct": "View Product",
+    "addedOn": "Added on {date}",
+    "cannotLoad": "Cannot load favorites list",
+    "loadError": "Cannot load favorites list",
+    "priceInquiry": "Price Upon Request",
+    "productDetailComingSoon": "Product details feature in development"
+  },
+  "history": {
+    "title": "My Assessment History",
+    "empty": {
+      "title": "No assessment history yet",
+      "description": "After completing the questionnaire, your recommendation results will be automatically saved here",
+      "subtitle": "After completing the questionnaire, your recommendation results will be automatically saved here",
+      "startQuiz": "Start Questionnaire",
+      "action": "Start Questionnaire"
+    },
+    "sessionId": "Recommendation Result #{id}",
+    "resultId": "Recommendation Result #{id}",
+    "viewDetail": "View Details",
+    "cannotLoad": "Cannot load assessment history",
+    "loadError": "Cannot load assessment history",
+    "aiGenerated": "AI Generated",
+    "confidenceLabel": "Confidence"
+  },
+  "errors": {
+    "loginRequired": "Please login to save favorites",
+    "sessionExpired": "Login expired, please login again",
+    "loginExpired": "Login expired, please login again",
+    "removeFavoriteFailed": "Failed to remove favorite, please try again later",
+    "addFavoriteFailed": "Failed to add favorite, please try again later",
+    "operationFailed": "Operation failed, please try again later",
+    "fetchHistoryFailed": "Failed to fetch assessment history",
+    "fetchFavoritesFailed": "Failed to fetch favorites list",
+    "fetchFailed": "Failed to fetch data",
+    "productDetailInDevelopment": "Product details feature in development",
+    "removeFavorite": "Remove Favorite",
+    "addFavorite": "Add to Favorites"
+  },
+  "questionnaire": {
+    "title": "Health Questionnaire",
+    "progress": "Progress: {current}/{total}",
+    "submit": "Submit Questionnaire",
+    "questions": {
+      "sleep": "How many hours do you sleep per night?",
+      "exercise": "How often do you exercise?",
+      "diet": "What is your diet type?",
+      "stress": "How would you rate your stress level?",
+      "energy": "How is your energy level?"
+    }
+  }
+}
