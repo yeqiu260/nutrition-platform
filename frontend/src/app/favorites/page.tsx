@@ -1,4 +1,5 @@
-'use client';
+﻿'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -41,7 +42,7 @@ export default function FavoritesPage() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/user/favorites', {
+      const response = await fetch(`${API_BASE_URL}/api/user/favorites`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -74,7 +75,7 @@ export default function FavoritesPage() {
     setRemovingId(productId);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/user/favorites/${productId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/favorites/${productId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

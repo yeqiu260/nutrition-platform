@@ -1,4 +1,5 @@
-'use client';
+﻿'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
@@ -55,8 +56,8 @@ export default function AdminDashboard() {
     setLoading(true);
     try {
       const [configRes, userRes] = await Promise.all([
-        fetch('http://localhost:8000/api/admin/config', { headers: getHeaders() }),
-        fetch('http://localhost:8000/api/admin/users', { headers: getHeaders() }),
+        fetch(`${API_BASE_URL}/api/admin/config`, { headers: getHeaders() }),
+        fetch(`${API_BASE_URL}/api/admin/users`, { headers: getHeaders() }),
       ]);
       if (configRes.ok) setConfigs(await configRes.json());
       if (userRes.ok) setUsers(await userRes.json());
@@ -78,7 +79,7 @@ export default function AdminDashboard() {
       return;
     }
     try {
-      const res = await fetch('http://localhost:8000/api/admin/config', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/config`, {
         method: 'PUT',
         headers: getHeaders(),
         body: JSON.stringify({ key: configKey, value: configValue, description: configDesc }),
@@ -113,7 +114,7 @@ export default function AdminDashboard() {
       return;
     }
     try {
-      const res = await fetch('http://localhost:8000/api/admin/users', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users`, {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify({ username: newUsername, password: newPassword, role: newRole }),
@@ -133,7 +134,7 @@ export default function AdminDashboard() {
 
   const handleUpdateRole = async (userId: string, role: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/admin/users/${userId}/role`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
         method: 'PUT',
         headers: getHeaders(),
         body: JSON.stringify({ user_id: userId, new_role: role }),
@@ -150,7 +151,7 @@ export default function AdminDashboard() {
   const handleDeleteUser = async (userId: string, username: string) => {
     if (!confirm(`${t('forms.delete')} ${username}?`)) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/admin/users/${userId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: getHeaders(),
       });
@@ -166,7 +167,7 @@ export default function AdminDashboard() {
   const handleDeleteConfig = async (key: string) => {
     if (!confirm(`確定要刪除配置 ${key}？`)) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/admin/config/${key}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/config/${key}`, {
         method: 'DELETE',
         headers: getHeaders(),
       });

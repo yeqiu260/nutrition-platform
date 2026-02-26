@@ -1,4 +1,5 @@
-'use client';
+﻿'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -45,7 +46,7 @@ export default function AnalyticsPage() {
       }
 
       // 获取事件统计摘要
-      const summaryResponse = await fetch('http://localhost:8000/api/analytics/admin/summary', {
+      const summaryResponse = await fetch(`${API_BASE_URL}/api/analytics/admin/summary`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -60,8 +61,8 @@ export default function AnalyticsPage() {
 
       // 获取最近事件
       const eventsUrl = selectedEventType === 'all'
-        ? 'http://localhost:8000/api/analytics/admin/events?page=1&page_size=20'
-        : `http://localhost:8000/api/analytics/admin/events?event_type=${selectedEventType}&page=1&page_size=20`;
+        ? `${API_BASE_URL}/api/analytics/admin/events?page=1&page_size=20`
+        : `${API_BASE_URL}/api/analytics/admin/events?event_type=${selectedEventType}&page=1&page_size=20`;
 
       const eventsResponse = await fetch(eventsUrl, {
         headers: {

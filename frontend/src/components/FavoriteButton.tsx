@@ -1,4 +1,5 @@
-'use client';
+﻿'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import React, { useState, useEffect } from 'react';
 import { Heart } from 'lucide-react';
@@ -25,7 +26,7 @@ export function FavoriteButton({ productId, onToggle }: FavoriteButtonProps) {
 
     const checkFavorite = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/user/favorites/check/${productId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/user/favorites/check/${productId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -60,7 +61,7 @@ export function FavoriteButton({ productId, onToggle }: FavoriteButtonProps) {
     try {
       if (isFavorite) {
         // 移除收藏
-        const response = await fetch(`http://localhost:8000/api/user/favorites/${productId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/user/favorites/${productId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -79,7 +80,7 @@ export function FavoriteButton({ productId, onToggle }: FavoriteButtonProps) {
         }
       } else {
         // 添加收藏
-        const response = await fetch('http://localhost:8000/api/user/favorites', {
+        const response = await fetch(`${API_BASE_URL}/api/user/favorites`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

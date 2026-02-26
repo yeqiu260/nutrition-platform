@@ -1,4 +1,5 @@
-'use client';
+﻿'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
@@ -65,7 +66,7 @@ export default function ProductsPage() {
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/products/my', { headers: getHeaders() });
+      const res = await fetch(`${API_BASE_URL}/api/products/my`, { headers: getHeaders() });
       if (res.ok) setProducts(await res.json());
     } catch (err) { console.error('Load error:', err); }
     setLoading(false);
@@ -101,7 +102,7 @@ export default function ProductsPage() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const res = await fetch('http://localhost:8000/api/products/upload-image', {
+      const res = await fetch(`${API_BASE_URL}/api/products/upload-image`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },
         body: formData,
@@ -132,8 +133,8 @@ export default function ProductsPage() {
     };
     try {
       const url = editingId 
-        ? `http://localhost:8000/api/products/my/${editingId}`
-        : 'http://localhost:8000/api/products/my';
+        ? `${API_BASE_URL}/api/products/my/${editingId}`
+        : `${API_BASE_URL}/api/products/my`;
       const res = await fetch(url, {
         method: editingId ? 'PUT' : 'POST',
         headers: getHeaders(),
@@ -167,7 +168,7 @@ export default function ProductsPage() {
   const handleDelete = async (id: string) => {
     if (!confirm(t('forms.delete'))) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/products/my/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/products/my/${id}`, {
         method: 'DELETE', headers: getHeaders(),
       });
       if (res.ok) { showMsg(tCommon('success')); loadProducts(); }

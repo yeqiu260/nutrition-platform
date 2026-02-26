@@ -1,4 +1,5 @@
 ﻿'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
@@ -397,7 +398,7 @@ const LoginView = ({ onLogin }: { onLogin: () => void }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -434,7 +435,7 @@ const LoginView = ({ onLogin }: { onLogin: () => void }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/admin/login', {
+      const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -476,7 +477,7 @@ const LoginView = ({ onLogin }: { onLogin: () => void }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/send-otp', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/send-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -514,7 +515,7 @@ const LoginView = ({ onLogin }: { onLogin: () => void }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/register', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1149,7 +1150,7 @@ export default function App() {
     // 获取使用量信息
     const locale = typeof window !== 'undefined' ? (localStorage.getItem('NEXT_LOCALE') || 'zh-TW') : 'zh-TW';
     const userId = typeof window !== 'undefined' ? (localStorage.getItem('user_id') || '') : '';
-    fetch('http://localhost:8000/api/quiz/usage', {
+    fetch(`${API_BASE_URL}/api/quiz/usage`, {
       headers: {
         'Accept-Language': locale,
         'X-User-ID': userId
@@ -1247,7 +1248,7 @@ export default function App() {
         const formData = new FormData();
         formData.append('file', file);
 
-        const uploadResponse = await fetch('http://localhost:8000/api/report/upload', {
+        const uploadResponse = await fetch(`${API_BASE_URL}/api/report/upload`, {
           method: 'POST',
           body: formData,
         });
@@ -1267,7 +1268,7 @@ export default function App() {
         while (attempts < maxAttempts) {
           await new Promise(resolve => setTimeout(resolve, 1000));
 
-          const statusResponse = await fetch(`http://localhost:8000/api/report/status/${uploadData.report_id}`);
+          const statusResponse = await fetch(`${API_BASE_URL}/api/report/status/${uploadData.report_id}`);
           console.log(`[Report] Polling attempt ${attempts + 1}, status response ok: ${statusResponse.ok}`);
 
           if (statusResponse.ok) {
@@ -1307,7 +1308,7 @@ export default function App() {
     const userId = typeof window !== 'undefined' ? localStorage.getItem('user_id') || '' : '';
 
     try {
-      const usageResponse = await fetch('http://localhost:8000/api/quiz/usage', {
+      const usageResponse = await fetch(`${API_BASE_URL}/api/quiz/usage`, {
         headers: {
           'Accept-Language': locale,
           'X-User-ID': userId
@@ -1357,7 +1358,7 @@ export default function App() {
       console.log('Health data keys:', healthDataToSubmit ? Object.keys(healthDataToSubmit) : 'null');
 
       // 调用后端 AI API
-      const response = await fetch('http://localhost:8000/api/quiz/submit', {
+      const response = await fetch(`${API_BASE_URL}/api/quiz/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1450,7 +1451,7 @@ export default function App() {
     // 重新获取使用量信息
     const locale = typeof window !== 'undefined' ? (localStorage.getItem('NEXT_LOCALE') || 'zh-TW') : 'zh-TW';
     const userId = typeof window !== 'undefined' ? (localStorage.getItem('user_id') || '') : '';
-    fetch('http://localhost:8000/api/quiz/usage', {
+    fetch(`${API_BASE_URL}/api/quiz/usage`, {
       headers: {
         'Accept-Language': locale,
         'X-User-ID': userId
@@ -1751,7 +1752,7 @@ function ResultView({
                               // 追踪产品点击事件
                               try {
                                 const token = localStorage.getItem('access_token');
-                                await fetch('http://localhost:8000/api/analytics/events/product-clicked', {
+                                await fetch(`${API_BASE_URL}/api/analytics/events/product-clicked`, {
                                   method: 'POST',
                                   headers: {
                                     'Content-Type': 'application/json',

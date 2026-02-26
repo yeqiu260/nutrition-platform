@@ -1,4 +1,5 @@
-'use client';
+﻿'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import { useState, useEffect } from 'react';
 
@@ -39,7 +40,7 @@ export default function PendingProductsPage() {
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/products/pending', { headers: getHeaders() });
+      const res = await fetch(`${API_BASE_URL}/api/products/pending`, { headers: getHeaders() });
       if (res.ok) setProducts(await res.json());
     } catch (err) {
       console.error('Load error:', err);
@@ -54,7 +55,7 @@ export default function PendingProductsPage() {
 
   const handleApprove = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/products/approve/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/products/approve/${id}`, {
         method: 'POST', headers: getHeaders(),
       });
       if (res.ok) {
@@ -69,7 +70,7 @@ export default function PendingProductsPage() {
   const handleReject = async (id: string) => {
     if (!confirm('確定要拒絕此商品嗎？商品將被刪除。')) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/products/reject/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/products/reject/${id}`, {
         method: 'POST', headers: getHeaders(),
       });
       if (res.ok) {
