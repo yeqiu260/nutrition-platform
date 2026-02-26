@@ -12,6 +12,12 @@ RUN npm install
 # 复制源代码
 COPY . .
 
+# 接受构建参数
+ARG NEXT_PUBLIC_API_URL
+
+# 赋值给环境变量供构建时使用
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 # 构建应用
 RUN npm run build
 
