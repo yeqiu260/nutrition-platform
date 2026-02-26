@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 复制依赖文件
-COPY pyproject.toml ./
+# 复制依赖文件（README.md 是 hatchling 构建所必需的）
+COPY pyproject.toml README.md ./
 
 # 安装 Python 依赖（升级 hatchling 避免兼容性问题）
 RUN pip install --no-cache-dir --upgrade pip hatchling && \
