@@ -14,8 +14,9 @@ RUN apt-get update && apt-get install -y \
 # 复制依赖文件
 COPY pyproject.toml ./
 
-# 安装 Python 依赖
-RUN pip install --no-cache-dir -e .
+# 安装 Python 依赖（升级 hatchling 避免兼容性问题）
+RUN pip install --no-cache-dir --upgrade pip hatchling && \
+    pip install --no-cache-dir .
 
 # 复制应用代码
 COPY . .
