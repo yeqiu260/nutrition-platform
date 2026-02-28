@@ -662,8 +662,14 @@ async def submit_quiz(
             print(f"✗ Failed to convert health data: {e}")
             lab_metrics = None
     
-    # 从环境变量获取 Grok API Key
-    api_key = settings.grok_api_key
+    # 优先从数据库系统配置获取 Grok API Key，方便通过管理后台切换，
+    # 若数据库没有配置则回退到环境变量
+    db_config_result = await db.execute(
+        select(SystemConfig).where(SystemConfig.key == "GROK_API_KEY")
+    )
+    db_config = db_config_result.scalar_one_or_none()
+    api_key = (db_config.value if db_config and db_config.value else None) or settings.grok_api_key
+    print(f"Grok API Key source: {'DB' if db_config and db_config.value else 'ENV'}")
     print(f"Grok API Key configured: {bool(api_key)}")
     if api_key:
         print(f"API Key length: {len(api_key)}")
