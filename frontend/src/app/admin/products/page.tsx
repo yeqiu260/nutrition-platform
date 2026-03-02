@@ -36,7 +36,7 @@ const SUPPLEMENT_OPTIONS = [
 export default function ProductsPage() {
   const t = useTranslations('admin');
   const tCommon = useTranslations('common');
-  
+
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -132,7 +132,7 @@ export default function ProductsPage() {
       price: price ? parseFloat(price) : null, currency, supplement_id: supplementId, purchase_url: purchaseUrl,
     };
     try {
-      const url = editingId 
+      const url = editingId
         ? `${API_BASE_URL}/api/products/my/${editingId}`
         : `${API_BASE_URL}/api/products/my`;
       const res = await fetch(url, {
@@ -178,7 +178,7 @@ export default function ProductsPage() {
   const getSupplementName = (id: string) => SUPPLEMENT_OPTIONS.find(s => s.id === id)?.name || id;
   const getImageSrc = (url: string | null) => {
     if (!url) return '';
-    if (url.startsWith('/api/')) return `http://localhost:8000${url}`;
+    if (url.startsWith('/api/')) return `${API_BASE_URL}${url}`;
     return url;
   };
 
@@ -221,11 +221,11 @@ export default function ProductsPage() {
                 <option value="CNY">CNY</option>
               </select>
             </div>
-            <div style={{...styles.formGroup, gridColumn: '1 / -1'}}>
+            <div style={{ ...styles.formGroup, gridColumn: '1 / -1' }}>
               <label style={styles.label}>{t('products.name')}</label>
               <input style={styles.input} value={purchaseUrl} onChange={e => setPurchaseUrl(e.target.value)} placeholder="https://..." />
             </div>
-            <div style={{...styles.formGroup, gridColumn: '1 / -1'}}>
+            <div style={{ ...styles.formGroup, gridColumn: '1 / -1' }}>
               <label style={styles.label}>{t('products.name')}</label>
               <div style={styles.uploadArea}>
                 <input
@@ -259,7 +259,7 @@ export default function ProductsPage() {
                 )}
               </div>
             </div>
-            <div style={{...styles.formGroup, gridColumn: '1 / -1'}}>
+            <div style={{ ...styles.formGroup, gridColumn: '1 / -1' }}>
               <label style={styles.label}>{t('products.name')}</label>
               <textarea style={styles.textarea} value={description} onChange={e => setDescription(e.target.value)} placeholder={t('products.name')} rows={3} />
             </div>

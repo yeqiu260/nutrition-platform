@@ -995,7 +995,7 @@ const ProductCarousel = ({ products, whyReasons }: {
   const getImageSrc = (imageUrl?: string) => {
     if (!imageUrl) return 'https://placehold.co/360x360/e0e0e0/555?text=Product';
     if (imageUrl.startsWith('http')) return imageUrl;
-    if (imageUrl.startsWith('/api/')) return `http://localhost:8000${imageUrl}`;
+    if (imageUrl.startsWith('/api/')) return `${API_BASE_URL}${imageUrl}`;
     return imageUrl;
   };
 

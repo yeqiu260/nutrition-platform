@@ -84,7 +84,7 @@ export default function PendingProductsPage() {
 
   const getImageSrc = (url: string | null) => {
     if (!url) return '';
-    if (url.startsWith('/api/')) return `http://localhost:8000${url}`;
+    if (url.startsWith('/api/')) return `${API_BASE_URL}${url}`;
     return url;
   };
 
