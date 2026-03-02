@@ -257,16 +257,19 @@ class AntivirusScanner:
             self.threat_count += 1
             return result
         
-        # 4. 检查可疑内容
-        content_check = self._check_suspicious_content(file_content)
-        if not content_check["safe"]:
-            result["safe"] = False
-            result["threats"].extend(content_check["threats"])
-            self.threat_count += 1
-            return result
-        
-        if content_check.get("warnings"):
-            result["warnings"].extend(content_check["warnings"])
+        # 4. 检查可疑内容（仅对非图片文件检查）
+        # 图片是二进制文件，b'<%' 等短模式在二进制数据中经常误报
+        ext = os.path.splitext(file_path)[1].lower().lstrip('.')
+        if ext not in self.IMAGE_EXTENSIONS:
+            content_check = self._check_suspicious_content(file_content)
+            if not content_check["safe"]:
+                result["safe"] = False
+                result["threats"].extend(content_check["threats"])
+                self.threat_count += 1
+                return result
+            
+            if content_check.get("warnings"):
+                result["warnings"].extend(content_check["warnings"])
         
         return result
     
