@@ -181,7 +181,7 @@ export default function FavoritesPage() {
                 <div className="relative">
                   <img
                     src={item.product_image?.startsWith('/api/')
-                      ? `http://localhost:8000${item.product_image}`
+                      ? `${API_BASE_URL}${item.product_image}`
                       : item.product_image || 'https://placehold.co/360x360/e0e0e0/555?text=Product'
                     }
                     alt={item.product_name}

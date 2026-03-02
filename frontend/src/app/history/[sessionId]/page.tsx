@@ -1,4 +1,5 @@
 'use client';
+import { API_BASE_URL } from '@/lib/api/config';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
@@ -41,7 +42,7 @@ export default function HistoryDetailPage() {
   const router = useRouter();
   const params = useParams();
   const sessionId = params.sessionId as string;
-  
+
   const [detail, setDetail] = useState<HistoryDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +53,7 @@ export default function HistoryDetailPage() {
 
   const fetchDetail = async () => {
     const token = localStorage.getItem('auth_token');
-    
+
     if (!token) {
       setError('請先登入查看歷史記錄');
       setLoading(false);
@@ -60,7 +61,7 @@ export default function HistoryDetailPage() {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/api/user/history/${sessionId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/history/${sessionId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -180,7 +181,7 @@ export default function HistoryDetailPage() {
                 <div className="flex-1">
                   <div className="text-sm text-gray-600 mb-1">{rec.group}</div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{rec.name}</h3>
-                  
+
                   {/* AI 推荐原因 */}
                   <div className="bg-gray-50 rounded-lg p-4 mb-4">
                     <p className="text-sm font-semibold text-gray-900 mb-2">✨ AI 分析原因：</p>
@@ -245,8 +246,8 @@ export default function HistoryDetailPage() {
                         )}
 
                         <img
-                          src={product.image_url?.startsWith('/api/') 
-                            ? `http://localhost:8000${product.image_url}` 
+                          src={product.image_url?.startsWith('/api/')
+                            ? `${API_BASE_URL}${product.image_url}`
                             : product.image_url || 'https://placehold.co/360x360/e0e0e0/555?text=Product'
                           }
                           alt={product.product_name}
@@ -264,7 +265,7 @@ export default function HistoryDetailPage() {
                         <p className="text-lg font-bold text-gray-900 mb-3">
                           {product.price ? `${product.currency} ${product.price}` : '價格洽詢'}
                         </p>
-                        
+
                         {/* AI 推荐理由 */}
                         {product.why_this_product && product.why_this_product.length > 0 && (
                           <div className="bg-yellow-50 rounded-lg p-3 mb-3">

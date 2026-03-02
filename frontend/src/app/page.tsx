@@ -1708,10 +1708,7 @@ function ResultView({
                           )}
 
                           <img
-                            src={product.image_url?.startsWith('/api/')
-                              ? `http://localhost:8000${product.image_url}`
-                              : product.image_url || 'https://placehold.co/360x360/e0e0e0/555?text=Product'
-                            }
+                            src={getImageSrc(product.image_url)}
                             alt={product.product_name}
                             className="sq-product-img"
                             onError={(e) => {
