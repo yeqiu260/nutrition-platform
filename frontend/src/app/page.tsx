@@ -99,6 +99,15 @@ interface AIRecommendationResponse {
 }
 
 
+// 模块级别的图片 URL 处理函数（供所有子组件共享）
+const getImageSrc = (imageUrl?: string | null) => {
+  if (!imageUrl) return 'https://placehold.co/360x360/e0e0e0/555?text=Product';
+  if (imageUrl.startsWith('http')) return imageUrl;
+  if (imageUrl.startsWith('/api/')) return `${API_BASE_URL}${imageUrl}`;
+  return imageUrl;
+};
+
+
 /* =========================================
    2. Sub-Components
    ========================================= */
@@ -991,13 +1000,7 @@ const ProductCarousel = ({ products, whyReasons }: {
     }
   };
 
-  // 获取图片 URL（处理相对路径）
-  const getImageSrc = (imageUrl?: string) => {
-    if (!imageUrl) return 'https://placehold.co/360x360/e0e0e0/555?text=Product';
-    if (imageUrl.startsWith('http')) return imageUrl;
-    if (imageUrl.startsWith('/api/')) return `${API_BASE_URL}${imageUrl}`;
-    return imageUrl;
-  };
+  // getImageSrc 已提升至模块级别，所有组件共享
 
   if (!products || products.length === 0) {
     return (
