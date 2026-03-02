@@ -41,6 +41,7 @@ export default function AdminDashboard() {
   const [newRole, setNewRole] = useState('admin');
 
   const role = typeof window !== 'undefined' ? localStorage.getItem('admin_role') : '';
+  const isAdminOrAbove = role === 'super_admin' || role === 'admin';
 
   const getHeaders = () => ({
     'Content-Type': 'application/json',
@@ -55,12 +56,15 @@ export default function AdminDashboard() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [configRes, userRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/api/admin/config`, { headers: getHeaders() }),
-        fetch(`${API_BASE_URL}/api/admin/users`, { headers: getHeaders() }),
-      ]);
-      if (configRes.ok) setConfigs(await configRes.json());
-      if (userRes.ok) setUsers(await userRes.json());
+      // 仅管理员和超级管理员才请求配置和用户列表，Partner 角色跳过
+      if (isAdminOrAbove) {
+        const [configRes, userRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/api/admin/config`, { headers: getHeaders() }),
+          fetch(`${API_BASE_URL}/api/admin/users`, { headers: getHeaders() }),
+        ]);
+        if (configRes.ok) setConfigs(await configRes.json());
+        if (userRes.ok) setUsers(await userRes.json());
+      }
     } catch (err) {
       console.error('Load error:', err);
     }
@@ -159,9 +163,7 @@ export default function AdminDashboard() {
         showMessage(tCommon('success'));
         loadData();
       }
-    } catch (err: any) {
-      showMessage(err.message, true);
-    }
+    } catch (err: any) { showMessage(err.message, true); }
   };
 
   const handleDeleteConfig = async (key: string) => {
@@ -206,143 +208,155 @@ export default function AdminDashboard() {
           <div style={styles.quickLinkTitle}>商品管理</div>
           <div style={styles.quickLinkDesc}>管理所有商品</div>
         </a>
-        <a href="/admin/products/pending" style={styles.quickLinkCard}>
-          <div style={styles.quickLinkIcon}>⏳</div>
-          <div style={styles.quickLinkTitle}>待審核商品</div>
-          <div style={styles.quickLinkDesc}>審核新商品</div>
-        </a>
-        <a href="/admin/analytics" style={styles.quickLinkCard}>
-          <div style={styles.quickLinkIcon}>📊</div>
-          <div style={styles.quickLinkTitle}>用戶行為分析</div>
-          <div style={styles.quickLinkDesc}>查看事件追踪</div>
-        </a>
-        <a href="/admin/review" style={styles.quickLinkCard}>
-          <div style={styles.quickLinkIcon}>✅</div>
-          <div style={styles.quickLinkTitle}>審核隊列</div>
-          <div style={styles.quickLinkDesc}>審核推薦結果</div>
-        </a>
+        {isAdminOrAbove && (
+          <a href="/admin/products/pending" style={styles.quickLinkCard}>
+            <div style={styles.quickLinkIcon}>⏳</div>
+            <div style={styles.quickLinkTitle}>待審核商品</div>
+            <div style={styles.quickLinkDesc}>審核新商品</div>
+          </a>
+        )}
+        {isAdminOrAbove && (
+          <a href="/admin/analytics" style={styles.quickLinkCard}>
+            <div style={styles.quickLinkIcon}>📊</div>
+            <div style={styles.quickLinkTitle}>用戶行為分析</div>
+            <div style={styles.quickLinkDesc}>查看事件追踪</div>
+          </a>
+        )}
+        {isAdminOrAbove && (
+          <a href="/admin/review" style={styles.quickLinkCard}>
+            <div style={styles.quickLinkIcon}>✅</div>
+            <div style={styles.quickLinkTitle}>審核隊列</div>
+            <div style={styles.quickLinkDesc}>審核推薦結果</div>
+          </a>
+        )}
       </div>
 
-      <div style={styles.tabs}>
-        <button style={activeTab === 'config' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('config')}>
-          {t('config.title')}
-        </button>
-        <button style={activeTab === 'users' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('users')}>
-          {t('users.title')}
-        </button>
-      </div>
-
-      {activeTab === 'config' && (
-        <div>
-          {role === 'super_admin' && (
-            <div style={styles.card}>
-              <h3 style={styles.cardTitle}>{t('config.add')}</h3>
-              <div style={styles.formRow}>
-                <input style={styles.input} placeholder={t('config.key')} value={configKey} onChange={e => setConfigKey(e.target.value)} />
-                <input style={styles.input} placeholder={t('config.value')} value={configValue} onChange={e => setConfigValue(e.target.value)} />
-              </div>
-              <input style={{ ...styles.input, marginBottom: 10 }} placeholder={t('config.desc')} value={configDesc} onChange={e => setConfigDesc(e.target.value)} />
-              <button style={styles.btn} onClick={handleSaveConfig}>{tCommon('submit')}</button>
-            </div>
-          )}
-          <div style={styles.card}>
-            <h3 style={styles.cardTitle}>{t('config.title')}</h3>
-            <table style={styles.table}>
-              <thead>
-                <tr>
-                  <th style={styles.th}>{t('config.key')}</th>
-                  <th style={styles.th}>{t('config.value')}</th>
-                  <th style={styles.th}>{t('config.desc')}</th>
-                  <th style={styles.th}>{t('config.updated_at')}</th>
-                  {role === 'super_admin' && <th style={styles.th}>{tCommon('submit')}</th>}
-                </tr>
-              </thead>
-              <tbody>
-                {configs.map(c => (
-                  <tr key={c.key}>
-                    <td style={styles.td}>{c.key}</td>
-                    <td style={styles.td}>{c.value}</td>
-                    <td style={styles.td}>{c.description || '-'}</td>
-                    <td style={styles.td}>{new Date(c.updated_at).toLocaleString()}</td>
-                    {role === 'super_admin' && (
-                      <td style={styles.td}>
-                        <button style={styles.deleteBtn} onClick={() => handleDeleteConfig(c.key)}>
-                          {t('forms.delete')}
-                        </button>
-                      </td>
-                    )}
-                  </tr>
-                ))}
-                {configs.length === 0 && <tr><td colSpan={role === 'super_admin' ? 5 : 4} style={styles.empty}>{tCommon('loading')}</td></tr>}
-              </tbody>
-            </table>
+      {/* 仅管理员和超级管理员可见配置/用户管理标签 */}
+      {isAdminOrAbove && (
+        <>
+          <div style={styles.tabs}>
+            <button style={activeTab === 'config' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('config')}>
+              {t('config.title')}
+            </button>
+            <button style={activeTab === 'users' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('users')}>
+              {t('users.title')}
+            </button>
           </div>
-        </div>
-      )}
 
-      {activeTab === 'users' && (
-        <div>
-          {role === 'super_admin' && (
-            <div style={styles.card}>
-              <h3 style={styles.cardTitle}>{t('users.add')}</h3>
-              <div style={styles.formRow}>
-                <input style={styles.input} placeholder={t('users.name')} value={newUsername} onChange={e => setNewUsername(e.target.value)} />
-                <input style={styles.input} type="password" placeholder={tCommon('login')} value={newPassword} onChange={e => setNewPassword(e.target.value)} />
-                <select style={styles.select} value={newRole} onChange={e => setNewRole(e.target.value)}>
-                  <option value="admin">Admin</option>
-                  <option value="partner">Partner</option>
-                  <option value="user">User</option>
-                </select>
-                <button style={styles.btn} onClick={handleCreateUser}>{tCommon('submit')}</button>
-              </div>
-            </div>
-          )}
-          <div style={styles.card}>
-            <h3 style={styles.cardTitle}>{t('users.title')}</h3>
-            <table style={styles.table}>
-              <thead>
-                <tr>
-                  <th style={styles.th}>{t('users.name')}</th>
-                  <th style={styles.th}>{t('users.role')}</th>
-                  <th style={styles.th}>{t('users.status')}</th>
-                  <th style={styles.th}>{t('users.created_at')}</th>
-                  {role === 'super_admin' && <th style={styles.th}>{tCommon('submit')}</th>}
-                </tr>
-              </thead>
-              <tbody>
-                {users.map(u => (
-                  <tr key={u.id}>
-                    <td style={styles.td}>{u.username}</td>
-                    <td style={styles.td}>
-                      {role === 'super_admin' && u.role !== 'super_admin' ? (
-                        <select style={styles.selectSmall} value={u.role} onChange={e => handleUpdateRole(u.id, e.target.value)}>
-                          <option value="admin">Admin</option>
-                          <option value="partner">Partner</option>
-                          <option value="user">User</option>
-                        </select>
-                      ) : roleLabels[u.role] || u.role}
-                    </td>
-                    <td style={styles.td}>
-                      <span style={u.is_active ? styles.active : styles.inactive}>{u.is_active ? 'Active' : 'Inactive'}</span>
-                    </td>
-                    <td style={styles.td}>{new Date(u.created_at).toLocaleString()}</td>
-                    {role === 'super_admin' && (
-                      <td style={styles.td}>
-                        {u.role !== 'super_admin' && (
-                          <button style={styles.deleteBtn} onClick={() => handleDeleteUser(u.id, u.username)}>{t('forms.delete')}</button>
+          {activeTab === 'config' && (
+            <div>
+              {role === 'super_admin' && (
+                <div style={styles.card}>
+                  <h3 style={styles.cardTitle}>{t('config.add')}</h3>
+                  <div style={styles.formRow}>
+                    <input style={styles.input} placeholder={t('config.key')} value={configKey} onChange={e => setConfigKey(e.target.value)} />
+                    <input style={styles.input} placeholder={t('config.value')} value={configValue} onChange={e => setConfigValue(e.target.value)} />
+                  </div>
+                  <input style={{ ...styles.input, marginBottom: 10 }} placeholder={t('config.desc')} value={configDesc} onChange={e => setConfigDesc(e.target.value)} />
+                  <button style={styles.btn} onClick={handleSaveConfig}>{tCommon('submit')}</button>
+                </div>
+              )}
+              <div style={styles.card}>
+                <h3 style={styles.cardTitle}>{t('config.title')}</h3>
+                <table style={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={styles.th}>{t('config.key')}</th>
+                      <th style={styles.th}>{t('config.value')}</th>
+                      <th style={styles.th}>{t('config.desc')}</th>
+                      <th style={styles.th}>{t('config.updated_at')}</th>
+                      {role === 'super_admin' && <th style={styles.th}>{tCommon('submit')}</th>}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {configs.map(c => (
+                      <tr key={c.key}>
+                        <td style={styles.td}>{c.key}</td>
+                        <td style={styles.td}>{c.value}</td>
+                        <td style={styles.td}>{c.description || '-'}</td>
+                        <td style={styles.td}>{new Date(c.updated_at).toLocaleString()}</td>
+                        {role === 'super_admin' && (
+                          <td style={styles.td}>
+                            <button style={styles.deleteBtn} onClick={() => handleDeleteConfig(c.key)}>
+                              {t('forms.delete')}
+                            </button>
+                          </td>
                         )}
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                      </tr>
+                    ))}
+                    {configs.length === 0 && <tr><td colSpan={role === 'super_admin' ? 5 : 4} style={styles.empty}>{tCommon('loading')}</td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'users' && (
+            <div>
+              {role === 'super_admin' && (
+                <div style={styles.card}>
+                  <h3 style={styles.cardTitle}>{t('users.add')}</h3>
+                  <div style={styles.formRow}>
+                    <input style={styles.input} placeholder={t('users.name')} value={newUsername} onChange={e => setNewUsername(e.target.value)} />
+                    <input style={styles.input} type="password" placeholder={tCommon('login')} value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+                    <select style={styles.select} value={newRole} onChange={e => setNewRole(e.target.value)}>
+                      <option value="admin">Admin</option>
+                      <option value="partner">Partner</option>
+                      <option value="user">User</option>
+                    </select>
+                    <button style={styles.btn} onClick={handleCreateUser}>{tCommon('submit')}</button>
+                  </div>
+                </div>
+              )}
+              <div style={styles.card}>
+                <h3 style={styles.cardTitle}>{t('users.title')}</h3>
+                <table style={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={styles.th}>{t('users.name')}</th>
+                      <th style={styles.th}>{t('users.role')}</th>
+                      <th style={styles.th}>{t('users.status')}</th>
+                      <th style={styles.th}>{t('users.created_at')}</th>
+                      {role === 'super_admin' && <th style={styles.th}>{tCommon('submit')}</th>}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map(u => (
+                      <tr key={u.id}>
+                        <td style={styles.td}>{u.username}</td>
+                        <td style={styles.td}>
+                          {role === 'super_admin' && u.role !== 'super_admin' ? (
+                            <select style={styles.selectSmall} value={u.role} onChange={e => handleUpdateRole(u.id, e.target.value)}>
+                              <option value="admin">Admin</option>
+                              <option value="partner">Partner</option>
+                              <option value="user">User</option>
+                            </select>
+                          ) : roleLabels[u.role] || u.role}
+                        </td>
+                        <td style={styles.td}>
+                          <span style={u.is_active ? styles.active : styles.inactive}>{u.is_active ? 'Active' : 'Inactive'}</span>
+                        </td>
+                        <td style={styles.td}>{new Date(u.created_at).toLocaleString()}</td>
+                        {role === 'super_admin' && (
+                          <td style={styles.td}>
+                            {u.role !== 'super_admin' && (
+                              <button style={styles.deleteBtn} onClick={() => handleDeleteUser(u.id, u.username)}>{t('forms.delete')}</button>
+                            )}
+                          </td>
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
 }
+
 
 const styles: Record<string, React.CSSProperties> = {
   container: { padding: 30 },
