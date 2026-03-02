@@ -302,6 +302,9 @@ class AntivirusScanner:
         
         return {"safe": True}
     
+    # 图片文件扩展名集合（魔数不匹配时仅警告，不拒绝）
+    IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'}
+
     def _check_magic_number(self, file_path: str, file_content: bytes) -> Dict[str, Any]:
         """检查文件魔数（验证文件类型）"""
         ext = os.path.splitext(file_path)[1].lower().lstrip('.')
@@ -312,6 +315,20 @@ class AntivirusScanner:
             actual_magic = file_content[:len(expected_magic)]
             
             if actual_magic != expected_magic:
+                # 图片文件：网站下载的图片经常扩展名与实际格式不符（如淘宝的.png实际是JPEG）
+                # 仅警告，不拒绝——上传接口已通过 content-type 验证了文件类型
+                if ext in self.IMAGE_EXTENSIONS:
+                    # 检查是否至少是某种已知图片格式
+                    is_some_image = any(
+                        file_content[:len(magic)] == magic
+                        for magic in self.MAGIC_NUMBERS.values()
+                    )
+                    if is_some_image:
+                        return {
+                            "safe": True,
+                            "warning": f"Extension .{ext} doesn't match actual content, but file is a valid image"
+                        }
+                
                 return {
                     "safe": False,
                     "reason": f"File type mismatch: extension is .{ext} but content doesn't match"
