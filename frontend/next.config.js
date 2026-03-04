@@ -3,14 +3,14 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   images: {
-    domains: ['cdn.shopify.com', 'localhost:8000'],
+    domains: ['cdn.shopify.com', 'wysik.com', 'www.wysik.com'],
     formats: ['image/avif', 'image/webp'],
   },
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: (process.env.NEXT_PUBLIC_API_URL || 'http://backend:8000') + '/api/:path*',
+        destination: 'http://backend:8000/api/:path*',
       },
     ];
   },
